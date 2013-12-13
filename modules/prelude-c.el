@@ -35,7 +35,7 @@
 (require 'prelude-programming)
 
 (defun prelude-c-mode-common-defaults ()
-  (setq c-basic-offset 4)
+  (setq c-basic-offset 2)
   (c-set-offset 'substatement-open 0))
 
 (setq prelude-c-mode-common-hook 'prelude-c-mode-common-defaults)
