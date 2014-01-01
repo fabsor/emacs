@@ -3,6 +3,12 @@
 (require 'prelude-programming)
 (prelude-require-packages '(php-mode))
 
+(defun drupal-search ()
+  "Search Drupal API with a query or region if any."
+  (interactive)
+  (prelude-search "http://drupalcontrib.org/api/search/7/" "Search Drupal API: "))
+
+
 ;;;###autoload
 (define-derived-mode drupal-mode php-mode "Drupal"
   "Major mode for Drupal coding.\n\n\\{drupal-mode-map}"
