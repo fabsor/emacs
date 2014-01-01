@@ -1,4 +1,7 @@
-;;; drupal-mode.el --- major mode for Drupal coding
+;; drupal-mode.el --- major mode for Drupal coding
+
+(require 'prelude-programming)
+(prelude-require-packages '(php-mode))
 
 ;;;###autoload
 (define-derived-mode drupal-mode php-mode "Drupal"
