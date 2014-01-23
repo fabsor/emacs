@@ -15,7 +15,7 @@
 (add-to-list 'auto-mode-alist '("\\.engine$" . drupal-mode))
 
 ;; Don't use smart parens'
-(turn-off-smartparens-mode)
+; (turn-off-smartparens-mode)
 
 ;; Javascript indent level
 (setq js-indent-level 2)
