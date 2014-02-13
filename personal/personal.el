@@ -5,6 +5,8 @@
 (custom-set-variables
  '(scroll-bar-mode nil))
 
+(custom-set-variables '(coffee-tab-width 2))
+
 ;; Map some files to drupal mode.
 (add-to-list 'auto-mode-alist '("\\.php$" . drupal-mode))
 (add-to-list 'auto-mode-alist '("\\.module$" . drupal-mode))
