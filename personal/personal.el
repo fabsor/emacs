@@ -1,6 +1,13 @@
 ;; Allow arrow navigation.
 (setq prelude-guru nil)
 
+;; Add some packages
+(prelude-require-packages '(monokai-theme))
+(prelude-require-packages '(jade-mode))
+
+;; Let's use the monokai theme
+(load-theme 'monokai t)
+
 ;; No scroll bars
 (custom-set-variables
  '(scroll-bar-mode nil))
