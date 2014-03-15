@@ -8,6 +8,10 @@
   (interactive)
   (prelude-search "http://drupalcontrib.org/api/search/7/" "Search Drupal API: "))
 
+(defun php-search ()
+  (interactive)
+  (prelude-search "http://se1.php.net/manual-lookup.php?scope=quickref&pattern=" "Search php.net: "))
+
 
 ;;;###autoload
 (define-derived-mode drupal-mode php-mode "Drupal"
