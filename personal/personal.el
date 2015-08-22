@@ -2,11 +2,11 @@
 (setq prelude-guru nil)
 
 ;; Add some packages
-(prelude-require-packages '(monokai-theme))
+(prelude-require-packages '(seti-theme))
 (prelude-require-packages '(jade-mode))
 
 ;; Let's use the monokai theme
-(load-theme 'monokai t)
+(load-theme 'seti t)
 
 ;; No scroll bars
 (custom-set-variables
@@ -31,13 +31,20 @@
     ad-do-it))
 
 
+(defun find-jshintrc ()
+  (expand-file-name ".jsxhintrc"
+                    (locate-dominating-file
+                     (or (buffer-file-name) default-directory) ".jsxhintrc")))
+
+
 (flycheck-define-checker jsxhint-checker
   "A JSX syntax and style checker based on JSXHint."
 
-  :command ("jsxhint" source)
+  :command ("jsxhint" (config-file "--config=" jshint-configuration-path) source)
   :error-patterns
   ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
   :modes (web-mode))
+
 (add-hook 'web-mode-hook
           (lambda ()
             (when (equal web-mode-content-type "jsx")
@@ -46,6 +53,7 @@
               (flycheck-mode))))
 
 (defun my-web-mode-hook ()
+  (setq-local jshint-configuration-path (find-jshintrc))
   "Hooks for Web mode."
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
@@ -72,3 +80,6 @@
       split-width-threshold nil)
 
 (server-start)
+
+(require 'virtualenvwrapper)
+(setq venv-location "/Users/fabsor/.virtualenvs")
