@@ -3,10 +3,11 @@
 
 ;; Add some packages
 (prelude-require-packages '(seti-theme))
+(prelude-require-packages '(solarized-theme))
 (prelude-require-packages '(jade-mode))
 
 ;; Let's use the monokai theme
-(load-theme 'seti t)
+(load-theme 'solarized-dark t)
 
 ;; No scroll bars
 (custom-set-variables
@@ -80,6 +81,3 @@
       split-width-threshold nil)
 
 (server-start)
-
-(require 'virtualenvwrapper)
-(setq venv-location "/Users/fabsor/.virtualenvs")
