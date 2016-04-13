@@ -1,13 +1,16 @@
 ;; Allow arrow navigation.
 (setq prelude-guru nil)
 
+(setq prelude-flyspell nil)
 ;; Add some packages
 (prelude-require-packages '(seti-theme))
 (prelude-require-packages '(solarized-theme))
 (prelude-require-packages '(jade-mode))
 
 ;; Let's use the monokai theme
-(load-theme 'solarized-dark t)
+(load-theme 'atom-one-dark t)
+
+(global-wakatime-mode)
 
 ;; No scroll bars
 (custom-set-variables
@@ -38,23 +41,29 @@
                      (or (buffer-file-name) default-directory) ".jsxhintrc")))
 
 
-(flycheck-define-checker jsxhint-checker
-  "A JSX syntax and style checker based on JSXHint."
+;; http://www.flycheck.org/manual/latest/index.html
+(require 'flycheck)
 
-  :command ("jsxhint" (config-file "--config=" jshint-configuration-path) source)
-  :error-patterns
-  ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-  :modes (web-mode))
+;; turn on flychecking globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (equal web-mode-content-type "jsx")
-              ;; enable flycheck
-              (flycheck-select-checker 'jsxhint-checker)
-              (flycheck-mode))))
+;; disable jshint since we prefer eslint checking
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint)))
+
+;; use eslint with web-mode for jsx files
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+;; customize flycheck temp file prefix
+(setq-default flycheck-temp-prefix ".flycheck")
+
+;; disable json-jsonlist checking for json files
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(json-jsonlist)))
 
 (defun my-web-mode-hook ()
-  (setq-local jshint-configuration-path (find-jshintrc))
   "Hooks for Web mode."
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
