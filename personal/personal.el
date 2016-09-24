@@ -7,9 +7,10 @@
 (prelude-require-packages '(dracula-theme))
 
 ;; Set the font
-(add-to-list 'default-frame-alist '(font . "Ubuntu Mono 16" ))
-(set-face-attribute 'default t :font "Ubuntu Mono 16" )
-(set-frame-font "Ubuntu Mono 16" nil t)
+;; You have to install the ubuntu mono font to use this.
+;; (add-to-list 'default-frame-alist '(font . "Ubuntu Mono 16" ))
+;; (set-face-attribute 'default t :font "Ubuntu Mono 16" )
+;; (set-frame-font "Ubuntu Mono 16" nil t)
 
 (load-theme 'dracula t)
 
