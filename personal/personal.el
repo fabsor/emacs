@@ -3,14 +3,17 @@
 
 (setq prelude-flyspell nil)
 ;; Add some packages
-(prelude-require-packages '(seti-theme))
 (prelude-require-packages '(solarized-theme))
-(prelude-require-packages '(jade-mode))
+(prelude-require-packages '(dracula-theme))
 
-;; Let's use the monokai theme
-(load-theme 'atom-one-dark t)
+;; Set the font
+(add-to-list 'default-frame-alist '(font . "Ubuntu Mono 16" ))
+(set-face-attribute 'default t :font "Ubuntu Mono 16" )
+(set-frame-font "Ubuntu Mono 16" nil t)
 
-(global-wakatime-mode)
+(load-theme 'dracula t)
+
+;; (global-wakatime-mode)
 
 ;; No scroll bars
 (custom-set-variables
@@ -28,6 +31,7 @@
 (add-to-list 'auto-mode-alist '("\\.engine$" . php-mode))
 
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
 (defadvice web-mode-highlight-part (around tweak-jsx activate)
   (if (equal web-mode-content-type "jsx")
       (let ((web-mode-enable-part-face nil))
@@ -63,6 +67,11 @@
               (append flycheck-disabled-checkers
                       '(json-jsonlist)))
 
+(add-to-list 'load-path "/Users/fabsor/apps/tern/emacs/")
+(autoload 'tern-mode "tern.el" nil t)
+
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
   (setq web-mode-code-indent-offset 2)
@@ -88,5 +97,10 @@
 
 (setq split-height-threshold nil
       split-width-threshold nil)
+
+
+(setq elfeed-feeds
+      '("https://news.ycombinator.com/rss"
+        "https://www.kntnt.com/feed/"))
 
 (server-start)
