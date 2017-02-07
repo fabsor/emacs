@@ -94,6 +94,7 @@
 (custom-set-variables
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
+ '(js-switch-indent-offset 2)
  )
 
 (setq split-height-threshold nil
