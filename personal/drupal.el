@@ -2,6 +2,7 @@
 
 (require 'prelude-programming)
 (prelude-require-packages '(php-mode))
+(prelude-require-packages '(geben))
 (setq c-basic-offset 2)
 (c-set-offset 'case-label '+)
 (c-set-offset 'arglist-close 0)

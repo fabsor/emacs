@@ -2,9 +2,13 @@
 (setq prelude-guru nil)
 
 (setq prelude-flyspell nil)
+
+(setq ido-use-filename-at-point 'disabled)
 ;; Add some packages
 (prelude-require-packages '(solarized-theme))
 (prelude-require-packages '(dracula-theme))
+
+(prelude-require-packages '(yasnippet))
 
 ;; Set the font
 ;; You have to install the ubuntu mono font to use this.
@@ -14,13 +18,14 @@
 
 (load-theme 'dracula t)
 
-;; (global-wakatime-mode)
-
+(require 'yasnippet)
+(yas-global-mode 1)
 ;; No scroll bars
 (custom-set-variables
  '(scroll-bar-mode nil))
 
 (custom-set-variables '(coffee-tab-width 2))
+
 
 ;; Map some files to drupal mode.
 
@@ -30,7 +35,6 @@
 (add-to-list 'auto-mode-alist '("\\.install$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.profile$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.engine$" . php-mode))
-
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 
 (defun light ()
@@ -80,7 +84,7 @@
                       '(json-jsonlist)))
 
 (add-to-list 'load-path "/Users/fabsor/apps/tern/emacs/")
-(autoload 'tern-mode "tern.el" nil t)
+(add-to-list 'load-path ".")
 
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 
@@ -111,6 +115,15 @@
  '(js2-bounce-indent-p t)
  '(js-switch-indent-offset 2)
  )
+(setq python-lsp-pyls-path "/home/fabsor/.virtualenvs/mailhead/bin/pyls")
+
+(require 'lsp-flycheck)
+(require 'lsp-mode)
+(require 'lsp-python)
+
+(add-hook 'python-mode-hook #'lsp-mode)
+
+
 
 (setq split-height-threshold nil
       split-width-threshold nil)
