@@ -27,7 +27,7 @@
 (custom-set-variables '(coffee-tab-width 2))
 
 
-;; Map some files to drupal mode.
+;; Map some files to php mode.
 
 (add-to-list 'auto-mode-alist '("\\.module$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.test$" . php-mode))
@@ -115,14 +115,7 @@
  '(js2-bounce-indent-p t)
  '(js-switch-indent-offset 2)
  )
-(setq python-lsp-pyls-path "/home/fabsor/.virtualenvs/mailhead/bin/pyls")
-
-(require 'lsp-flycheck)
-(require 'lsp-mode)
-(require 'lsp-python)
-
-(add-hook 'python-mode-hook #'lsp-mode)
-
+;; (setq python-lsp-pyls-path "/home/fabsor/.virtualenvs/mailhead/bin/pyls")
 
 
 (setq split-height-threshold nil
