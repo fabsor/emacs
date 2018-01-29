@@ -24,3 +24,6 @@ tramp
 .emacs.desktop
 .emacs.desktop.lock
 network-security.data
+anaconda-mode
+geben
+ido.hist
