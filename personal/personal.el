@@ -8,8 +8,6 @@
 (prelude-require-packages '(solarized-theme))
 (prelude-require-packages '(dracula-theme))
 
-(prelude-require-packages '(yasnippet))
-
 ;; Set the font
 ;; You have to install the ubuntu mono font to use this.
 ;; (add-to-list 'default-frame-alist '(font . "Ubuntu Mono 16" ))
@@ -18,8 +16,6 @@
 
 (load-theme 'dracula t)
 
-(require 'yasnippet)
-(yas-global-mode 1)
 ;; No scroll bars
 (custom-set-variables
  '(scroll-bar-mode nil))
