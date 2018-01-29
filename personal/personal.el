@@ -8,6 +8,7 @@
 (prelude-require-packages '(solarized-theme))
 (prelude-require-packages '(dracula-theme))
 
+(prelude-require-packages '(geben))
 ;; Set the font
 ;; You have to install the ubuntu mono font to use this.
 ;; (add-to-list 'default-frame-alist '(font . "Ubuntu Mono 16" ))
