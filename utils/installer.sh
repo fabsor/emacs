@@ -125,7 +125,7 @@ done
 
 VERBOSE_COLOR=$BBLUE
 
-[ -z $PRELUDE_URL ] && PRELUDE_URL="https://github.com/Kntnt/prelude.git"
+[ -z $PRELUDE_URL ] && PRELUDE_URL="https://github.com/fabsor/emacs.git"
 [ -z "$PRELUDE_INSTALL_DIR" ] && PRELUDE_INSTALL_DIR="$HOME/.emacs.d"
 
 if [ x$PRELUDE_VERBOSE != x ]
