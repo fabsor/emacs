@@ -7,6 +7,7 @@
 ;; Add some packages
 (prelude-require-packages '(solarized-theme))
 (prelude-require-packages '(dracula-theme))
+(prelude-require-packages '(oceanic-theme))
 
 (prelude-require-packages '(geben))
 ;; Set the font
@@ -15,7 +16,7 @@
 ;; (set-face-attribute 'default t :font "Ubuntu Mono 16" )
 ;; (set-frame-font "Ubuntu Mono 16" nil t)
 
-(load-theme 'dracula t)
+(load-theme 'oceanic t)
 
 ;; No scroll bars
 (custom-set-variables
@@ -23,6 +24,9 @@
 
 (custom-set-variables '(coffee-tab-width 2))
 
+(custom-set-faces (if (not window-system) '(default ((t (:background "nil"))))))
+
+(setq warning-minimum-level :emergency)
 
 ;; Map some files to php mode.
 
@@ -33,6 +37,7 @@
 (add-to-list 'auto-mode-alist '("\\.profile$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.engine$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
 
 (defun light ()
   "Light look"
@@ -94,8 +99,10 @@
   )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-(setq geben-path-mappings '(("/srv/projects/crm/web" "/var/www")))
+(setq geben-path-mappings '(("/Users/fabsor/projects/leanlab-project/web" "/srv/www/leanlab/web")))
 (setq geben-dbgp-default-port 9001)
+(setq geben-pause-at-entry-line nil)
+(setq geben-show-redirect-buffers nil)
 
 (setq mac-option-modifier nil
       mac-command-modifier 'meta
@@ -114,7 +121,6 @@
  )
 ;; (setq python-lsp-pyls-path "/home/fabsor/.virtualenvs/mailhead/bin/pyls")
 
-
 (setq split-height-threshold nil
       split-width-threshold nil)
 
@@ -122,5 +128,17 @@
 (setq elfeed-feeds
       '("https://news.ycombinator.com/rss"
         "https://www.kntnt.com/feed/"))
+
+
+(setq-default c-basic-offset 2)
+(setq-default tab-width 2)
+
+(add-hook 'php-mode-hook 'php-enable-drupal-coding-style)
+
+(c-set-offset 'case-label '+)
+(c-set-offset 'arglist-close 0)
+(c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
+(c-set-offset 'arglist-cont-nonempty 'c-lineup-math) ; for DBTNG fields and values
+
 
 (server-start)
