@@ -4,19 +4,25 @@
 (setq prelude-flyspell nil)
 
 (setq ido-use-filename-at-point 'disabled)
+
 ;; Add some packages
 (prelude-require-packages '(solarized-theme))
 (prelude-require-packages '(dracula-theme))
-(prelude-require-packages '(oceanic-theme))
-
+(prelude-require-packages '(material-theme))
 (prelude-require-packages '(geben))
+(prelude-require-packages '(material-theme))
+(prelude-require-packages '(tide))
+(prelude-require-packages '(typescript-mode))
 ;; Set the font
 ;; You have to install the ubuntu mono font to use this.
 ;; (add-to-list 'default-frame-alist '(font . "Ubuntu Mono 16" ))
 ;; (set-face-attribute 'default t :font "Ubuntu Mono 16" )
 ;; (set-frame-font "Ubuntu Mono 16" nil t)
 
-(load-theme 'oceanic t)
+(load-theme 'material t)
+
+(setq max-specpdl-size 100000
+      max-lisp-eval-depth 20000)
 
 ;; No scroll bars
 (custom-set-variables
@@ -37,6 +43,8 @@
 (add-to-list 'auto-mode-alist '("\\.profile$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.engine$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ts$" . typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
 
 (defun light ()
@@ -99,7 +107,7 @@
   )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-(setq geben-path-mappings '(("/Users/fabsor/projects/leanlab-project/web" "/srv/www/leanlab/web")))
+(setq geben-path-mappings '(("/Users/fabsor/projects/leanlab-docker/web" "/srv/www/leanlab/web")))
 (setq geben-dbgp-default-port 9001)
 (setq geben-pause-at-entry-line nil)
 (setq geben-show-redirect-buffers nil)
@@ -129,6 +137,34 @@
       '("https://news.ycombinator.com/rss"
         "https://www.kntnt.com/feed/"))
 
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(require 'web-mode)
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+
+;; enable typescript-tslint checker
+(flycheck-add-mode 'typescript-tslint 'web-mode)
 
 (setq-default c-basic-offset 2)
 (setq-default tab-width 2)
@@ -140,5 +176,8 @@
 (c-set-offset 'arglist-intro '+) ; for FAPI arrays and DBTNG
 (c-set-offset 'arglist-cont-nonempty 'c-lineup-math) ; for DBTNG fields and values
 
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
+;; (add-to-list 'eglot-server-programs '(php-mode . ("php-language-server")))
 (server-start)
