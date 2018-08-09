@@ -10,16 +10,17 @@
 (prelude-require-packages '(dracula-theme))
 (prelude-require-packages '(material-theme))
 (prelude-require-packages '(geben))
-(prelude-require-packages '(material-theme))
 (prelude-require-packages '(tide))
 (prelude-require-packages '(typescript-mode))
+(prelude-require-packages '(web-narrow-mode))
+
 ;; Set the font
 ;; You have to install the ubuntu mono font to use this.
 ;; (add-to-list 'default-frame-alist '(font . "Ubuntu Mono 16" ))
 ;; (set-face-attribute 'default t :font "Ubuntu Mono 16" )
 ;; (set-frame-font "Ubuntu Mono 16" nil t)
 
-(load-theme 'material t)
+(load-theme 'dracula t)
 
 (setq max-specpdl-size 100000
       max-lisp-eval-depth 20000)
@@ -29,6 +30,8 @@
  '(scroll-bar-mode nil))
 
 (custom-set-variables '(coffee-tab-width 2))
+
+(custom-set-variables '(typescript-indent-level 2))
 
 (custom-set-faces (if (not window-system) '(default ((t (:background "nil"))))))
 
@@ -71,6 +74,7 @@
                     (locate-dominating-file
                      (or (buffer-file-name) default-directory) ".jsxhintrc")))
 
+
 ;; http://www.flycheck.org/manual/latest/index.html
 (require 'flycheck)
 
@@ -107,7 +111,7 @@
   )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-(setq geben-path-mappings '(("/Users/fabsor/projects/leanlab-docker/web" "/srv/www/leanlab/web")))
+(setq geben-path-mappings '(("/home/fabsor/projects/leanlab-docker/web" "/srv/www/leanlab/web")))
 (setq geben-dbgp-default-port 9001)
 (setq geben-pause-at-entry-line nil)
 (setq geben-show-redirect-buffers nil)
@@ -152,9 +156,6 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
-
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (require 'web-mode)
@@ -165,6 +166,8 @@
 
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
+(require 'web-narrow-mode)
+(add-hook 'web-mode-hook 'web-narrow-mode)
 
 (setq-default c-basic-offset 2)
 (setq-default tab-width 2)
@@ -178,6 +181,7 @@
 
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
+
 
 ;; (add-to-list 'eglot-server-programs '(php-mode . ("php-language-server")))
 (server-start)
